@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: index-html-cm
+  namespace: default
+data:
+  index.html: |
+    <html>
+    <h1>Hello!</h1>
+    </br> </br> </br>
+    <h2>Configmap created.</h2>
+    </html>

@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job
+  namespace: playground
+spec:
+  template:
+    spec:
+      containers: 
+      - name: job
+        image: curlimages/curl
+        env:
+          - name: ALLOWED
+            value: "Network Policy failed! I shouldn't be allowed!"
+          - name: DENIED
+            value: "Network Policy works! Echo is safe <3"
+        command:
+          - /bin/sh
+          - -c
+          - if ((curl -I echo-service:80/?echo_code=200)); then echo $DENIED; else echo $ALLOWED; fi
+      restartPolicy: Never
+  backoffLimit: 3
